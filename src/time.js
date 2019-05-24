@@ -13,9 +13,9 @@
  * @param {string} date 要获取的日期, 默认为当前日期
  * @returns {number} 该日期对应的时间戳 单位毫秒
  */
-export const getTimeStamp = (date = new Date()) => {
+export const getTimeStamp = date => {
   // ios 不支持 '2014-07-10 10:21:12' 这样的格式
-  const dateString = new Date(date.replace(/-/g, '/'))
+  const dateString = new Date(date ? date.replace(/-/g, '/') : new Date());
 
   return Date.parse(dateString);
 };
@@ -113,7 +113,7 @@ export const isBefore = (date) => {
  * example: isAfter('1949/10/01 10:21:12')
  * return: true
  *
- * example: isAfter('2050/07/10 10:21:12')
+ * example: isAfter('2050-07-10 10:21:12')
  * return: false
  *
  * @param {string} date 参照的时间
@@ -130,7 +130,7 @@ export const isAfter = (date) => {
  * example: isBetween('1949/10/01 10:21:12', '2050/10/01 10:21:12')
  * return: true
  *
- * example: isBetween('1949/10/01 10:21:12', '2008/10/01 10:21:12')
+ * example: isBetween('1949-10-01 10:21:12', '2008/10/01 10:21:12')
  * return: false
  *
  * @param {string} beforeDate 参照的起始时间
