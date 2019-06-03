@@ -26,16 +26,33 @@ export const getRoundNumber = (min = 0, max = 1, number = 1) => {
 
 
 /**
- * 格式化价格
+ * 格式化价格(每隔3位一个逗号)
+ *
+ * example: formatPrice(123456789)
+ * return: '123,456,789'
+ *
+ * example: formatPrice(123456789, true)
+ * return: '123,456,789.00'
+ *
+ * example: formatPrice(123456789.00, true)
+ * return: '123,456,789.00'
+ *
+ * example: formatPrice(123456789.00)
+ * return: '123,456,789.00'
+ *
+ * example: formatPrice(123456789.8)
+ * return: '123,456,789.80'
  *
  * @param {number} price 价格
- * @param {number} decimal 是否需要小点两位，如果价格已经是小数，则此参数无效
- * @returns {string} 被格式化后的价格，每隔3位一个逗号
+ * @param {number} decimal 是否需要小点两位; 如果价格已是小数，则此参数无效
+ * @returns {string} 被格式化后的价格,例如 '123,456,789.00'
  */
-export const formatPrice = (price, decimal = true ) => {
-  if (price.includes('.') || decimal) {
-    return toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+export const formatPrice = (price, decimal = false ) => {
+  const regExp = /\B(?=(\d{3})+(?!\d))/g;
+
+  if (decimal || price.toString().includes('.')) {
+    return price.toFixed(2).toString().replace(regExp, ',');
   }
 
-  return price.toString.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return price.toString().replace(regExp, ',');
 }
