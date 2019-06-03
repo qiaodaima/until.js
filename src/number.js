@@ -1,6 +1,12 @@
 /**
  * 按照区间生成随机数
  *
+ * example: getRoundNumber(5, 15, 3)
+ * return: [9, 6, 13]
+ *
+ * example: getRoundNumber(6, 20, 1)
+ * return: 10
+ *
  * @param {number} min 最小值 默认值 0
  * @param {number} max 最大值 默认值 1
  * @param {number} number 要生成几个随机数，默认生成1个

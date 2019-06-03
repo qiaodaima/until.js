@@ -1,7 +1,13 @@
 /**
- * 获取 url 参数
+ * 获取url上的查询参数
  *
- * @param {string} url 不传递则表示获取当前 url 参数对象
+ * example: getQueryParams('https://www.baidu.com/?color=3&name=清华')
+ * return: {color: 3, name: '清华'}
+ *
+ * example: getQueryParams('https://www.baidu.com')
+ * return: {}
+ *
+ * @param {string} url 不传递则表示获取当前url
  * @returns {object} url 参数对象集合
  */
 export const getQueryParams = (url = location.search) => {
