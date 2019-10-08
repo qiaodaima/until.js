@@ -28,10 +28,19 @@ export const debounce = (fn, fps = 500) => {
 export const throttle = (fn, fps = 500) => {
     let timer = null;
     let timeStampFlag = Date.parse(new Date());
+    let isFirst = true;
 
     return function () {
         const nowTimeStamp = Date.parse(new Date());
         const overflow = nowTimeStamp - timeStampFlag > fps;
+
+        // 第一次不延时执行
+        if (isFirst) {
+            isFirst = false;
+            fn(...arguments);
+
+            return;
+        }
 
         if (overflow) {
             timeStampFlag = Date.parse(new Date());
