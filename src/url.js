@@ -11,17 +11,17 @@
  * @returns {object} url 参数对象集合
  */
 export const getQueryParams = (url = location.search) => {
-  let params = {};
+    let params = {};
 
-  if (!url.includes('?')) {
+    if (!url.includes('?')) {
+        return params;
+    }
+
+    url.split('?')[1].split('&').map(item => {
+        const [key, value] = item.split('=');
+
+        params[key] = Number(value).toString() === 'NaN' ? decodeURI(value) : Number(value);
+    });
+
     return params;
-  }
-
-  url.split('?')[1].split('&').map(item => {
-    const [key, value] = item.split('=');
-
-    params[key] = Number(value).toString() === 'NaN' ? decodeURI(value) : Number(value);
-  });
-
-  return params;
 }

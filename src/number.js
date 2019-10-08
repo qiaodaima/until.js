@@ -13,15 +13,15 @@
  * @returns {number|array} 生成的随机数 [min, max] 左闭右闭区间
  */
 export const getRoundNumber = (min = 0, max = 1, number = 1) => {
-  const tempMin = Math.ceil(min);
-  const tempMax = Math.floor(max);
-  const result = [];
+    const tempMin = Math.ceil(min);
+    const tempMax = Math.floor(max);
+    const result = [];
 
-  for (let i = 0; i < number; i++) {
-    result.push(Math.floor(Math.random() * (tempMax - tempMin + 1)) + tempMin);
-  }
+    for (let i = 0; i < number; i++) {
+        result.push(Math.floor(Math.random() * (tempMax - tempMin + 1)) + tempMin);
+    }
 
-  return number === 1 ? result[0] : result;
+    return number === 1 ? result[0] : result;
 }
 
 
@@ -48,11 +48,11 @@ export const getRoundNumber = (min = 0, max = 1, number = 1) => {
  * @returns {string} 被格式化后的价格,例如 '123,456,789.00'
  */
 export const formatPrice = (price, decimal = false ) => {
-  const regExp = /\B(?=(\d{3})+(?!\d))/g;
+    const regExp = /\B(?=(\d{3})+(?!\d))/g;
 
-  if (decimal || price.toString().includes('.')) {
-    return price.toFixed(2).toString().replace(regExp, ',');
-  }
+    if (decimal || price.toString().includes('.')) {
+        return price.toFixed(2).toString().replace(regExp, ',');
+    }
 
-  return price.toString().replace(regExp, ',');
+    return price.toString().replace(regExp, ',');
 }

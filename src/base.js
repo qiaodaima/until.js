@@ -8,31 +8,31 @@
  * @returns {bool} 是否复制成功
  */
 export const copyToClipboard = (text) => {
-  try {
-    // 是否支持指定的编辑指令
-    const supported = document.queryCommandSupported('copy');
+    try {
+        // 是否支持指定的编辑指令
+        const supported = document.queryCommandSupported('copy');
 
-    if (!supported) {
-      return false;
+        if (!supported) {
+            return false;
+        }
+
+        const input = document.createElement('textarea');
+
+        input.value = text;
+        input.style.cssText = 'position: absolute; top: -10000px; left: -10000px;';
+        document.body.appendChild(input);
+
+        input.setAttribute('readonly', ''); // 避免ios弹出键盘
+        input.select();
+        input.setSelectionRange(0, input.value.length); // 选中文本
+        document.execCommand('copy');
+        document.body.removeChild(input);
+
+        return true;
+    } catch (error) {
+        console.error(error);
+        return false;
     }
-
-    const input = document.createElement('textarea');
-
-    input.value = text;
-    input.style.cssText = 'position: absolute; top: -10000px; left: -10000px;';
-    document.body.appendChild(input);
-
-    input.setAttribute('readonly', ''); // 避免ios弹出键盘
-    input.select();
-    input.setSelectionRange(0, input.value.length); // 选中文本
-    document.execCommand('copy');
-    document.body.removeChild(input);
-
-    return true;
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
 }
 
 
@@ -52,16 +52,16 @@ export const copyToClipboard = (text) => {
  * @returns {undefined} 无返回值
  */
 export const setElementAttribute = (element, attrList) => {
-  Object.keys(attrList).map(key => {
-    switch (typeof attrList[key]) {
-      case 'object':
-        setElementAttribute(element[key], attrList[key]);
-        break;
-      default:
-        element[key] = attrList[key];
-        break;
-    }
-  });
+    Object.keys(attrList).map(key => {
+        switch (typeof attrList[key]) {
+            case 'object':
+                setElementAttribute(element[key], attrList[key]);
+                break;
+            default:
+                element[key] = attrList[key];
+                break;
+        }
+    });
 }
 
 
@@ -80,21 +80,21 @@ export const setElementAttribute = (element, attrList) => {
  * @returns {object} 各个属性的集合
  */
 export const getElementFeature = (element) => {
-  const { scrollTop, clientTop, scrollLeft, clientLeft } = document.documentElement;
-  const { left, top, right, bottom, width, height } = element.getBoundingClientRect();
-  const style = getComputedStyle(element, null);
+    const { scrollTop, clientTop, scrollLeft, clientLeft } = document.documentElement;
+    const { left, top, right, bottom, width, height } = element.getBoundingClientRect();
+    const style = getComputedStyle(element, null);
 
-  return {
-    width,
-    height,
-    style,
-    left,
-    top,
-    right,
-    bottom,
-    offsetTop: top + scrollTop - clientTop,
-    offsetLeft: left + scrollLeft - clientLeft,
-  };
+    return {
+        width,
+        height,
+        style,
+        left,
+        top,
+        right,
+        bottom,
+        offsetTop: top + scrollTop - clientTop,
+        offsetLeft: left + scrollLeft - clientLeft,
+    };
 }
 
 
