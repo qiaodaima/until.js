@@ -2,10 +2,10 @@
  * 函数防抖
  *
  * @param {function} fn 需要被防抖的函数
- * @param {number} fps 防抖的频率，单位毫秒，默认500毫秒
+ * @param {number} fps 防抖的频率，单位毫秒，默认200毫秒
  * @returns {function} 被防抖后的函数
  */
-export const debounce = (fn, fps = 500) => {
+export const debounce = (fn, fps = 200) => {
     let timer = null;
 
     return function () {
