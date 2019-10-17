@@ -1,5 +1,5 @@
 /**
- * 获取url上的查询参数
+ * 获取url上的查询参数（如果参数值是数字类型，会自动转换成number类型，将不再是字符串）
  *
  * example: getQueryParams('https://www.baidu.com/?color=3&name=清华')
  * return: {color: 3, name: '清华'}
