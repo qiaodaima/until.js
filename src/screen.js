@@ -23,8 +23,8 @@ export const isInVisibleArea = (element, offset = 0) => {
         right,
         bottom
     } = element.getBoundingClientRect();
-    const x = (right > 0 - offset) && (left < clientWidth + offset);
-    const y = (bottom > 0 - offset) && (top < clientHeight + offset);
+    const isInHorizontally = (right > 0 - offset) && (left < clientWidth + offset); // 水平方向是否在可视区域内
+    const isInVertically = (bottom > 0 - offset) && (top < clientHeight + offset); // 垂直方向是否在可视区域内
 
-    return isVisable && x && y;
+    return isVisable && isInHorizontally && isInVertically;
 }
