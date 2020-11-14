@@ -104,5 +104,6 @@ class Event {
      */
     clear = () => {
         this._events = {};
+        return this;
     }
 }
