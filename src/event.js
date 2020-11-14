@@ -17,7 +17,7 @@ const _once = (fn) => {
 }
 
 // FIXME: 属性的方法都是用箭头函数来实现，需要注意实际使用时this指向问题
-class Event {
+export class Event {
     // 事件中心
     _events = {}
 
