@@ -8,11 +8,11 @@
 export const debounce = (fn, fps = 200) => {
     let timer = null;
 
-    return function () {
+    return function (...params) {
         clearTimeout(timer);
 
         timer = setTimeout(() => {
-            fn(...arguments);
+            fn.call(this, ...params);
         }, fps);
     }
 }
@@ -30,26 +30,26 @@ export const throttle = (fn, fps = 500) => {
     let timeStampFlag = Date.parse(new Date());
     let isFirst = true;
 
-    return function () {
+    return function (...params) {
         const nowTimeStamp = Date.parse(new Date());
         const overflow = nowTimeStamp - timeStampFlag > fps;
 
         // 第一次不延时执行
         if (isFirst) {
             isFirst = false;
-            fn(...arguments);
+            fn.call(this, ...params);
 
             return;
         }
 
         if (overflow) {
             timeStampFlag = Date.parse(new Date());
-            fn(...arguments);
+            fn.call(this, ...params);
         } else {
             clearTimeout(timer);
 
             timer = setTimeout(() => {
-                fn(...arguments);
+                fn.call(this, ...params);
             }, fps);
         }
     }
