@@ -27,30 +27,31 @@ export const debounce = (fn, fps = 200) => {
  */
 export const throttle = (fn, fps = 500) => {
     let timer = null;
-    let timeStampFlag = Date.parse(new Date());
+    let timeStampFlag = Date.now();
     let isFirst = true;
 
     return function (...params) {
-        const nowTimeStamp = Date.parse(new Date());
-        const overflow = nowTimeStamp - timeStampFlag > fps;
+        const nowTimeStamp = Date.now();
+        const isOvertime = (nowTimeStamp - timeStampFlag) > fps;
+
+        clearTimeout(timer);
 
         // 第一次不延时执行
         if (isFirst) {
             isFirst = false;
             fn.call(this, ...params);
-
             return;
         }
 
-        if (overflow) {
-            timeStampFlag = Date.parse(new Date());
+        // 超时
+        if (isOvertime) {
+            timeStampFlag = Date.now();
             fn.call(this, ...params);
-        } else {
-            clearTimeout(timer);
-
-            timer = setTimeout(() => {
-                fn.call(this, ...params);
-            }, fps);
+            return;
         }
+
+        timer = setTimeout(() => {
+            fn.call(this, ...params);
+        }, fps);
     }
 }
