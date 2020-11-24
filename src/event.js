@@ -95,6 +95,11 @@ export class Event {
             return this;
         }
 
+        // 该事件类型还没注册，不需要被移除
+        if (!listener) {
+            return this;
+        }
+
         this._events[type] = listener.filter(handlerItem => handlerItem !== handler);
         return this;
     }
